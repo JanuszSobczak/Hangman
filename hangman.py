@@ -1,5 +1,21 @@
 import random
 
+with open("countries.txt") as file:
+    data = file.readlines()
+    #print(data)
+    dictionary = {}
+    for line in data:
+        items = line.strip(" ").split(' | ')
+        key = items[0]
+        values = items[1]
+        dictionary[key] = values
+key = random.choice(list(dictionary.keys()))
+print("Jaka jest stolica", key)
+values = dictionary.get(key)
+print(values)
+#def randomChoice():
+
+
 HANGMEN = (
 '''
 ----------
@@ -101,18 +117,12 @@ HANGMEN = (
 )
 
 MAX_WRONG = len(HANGMEN) -1
-
-WORD = ("rower", "skuter", "auto", "narty", "tramwaj")
-
-word = random.choice(WORD)
-
-so_far = "-" * len(word)
-
+so_far = "-" * len(values)
 wrong = 0
 
 used = []
 
-while wrong < MAX_WRONG and so_far != word:
+while wrong < MAX_WRONG and so_far != values:
     print(HANGMEN[wrong])
     print("\nWykorzystałeś już następujące litery:\n", used)
     print("\nNa razie zagadkowe słowo wygląda tak:\n", so_far)
@@ -124,11 +134,11 @@ while wrong < MAX_WRONG and so_far != word:
         guess = guess.lower()
     used.append(guess)
 
-    if guess in word:
+    if guess in values:
         print("Tak, ta litera występuje w słowie")
         new = ""
-        for i in range(len(word)):
-            if guess == word[i]:
+        for i in range(len(values)-1):
+            if guess == values[i]:
                 new += guess
             else:
                 new += so_far[i]
@@ -140,7 +150,8 @@ while wrong < MAX_WRONG and so_far != word:
 if wrong == MAX_WRONG:
     print(HANGMEN[wrong])
     print("\nZostałeś powieszony!")
+    print("\nZagadkowe słowo to", values)
 else:
     print("\nOdgadłeś!")
-    print("\nZagadkowe słowo to", word)
+    print("\nZagadkowe słowo to", values)
     input("\n\nAby zakończyć program, naciśnij klawisz Enter.")
