@@ -110,7 +110,7 @@ with open("countries.txt") as file:
         values = items[1]
         dictionary[key] = values
 key = random.choice(list(dictionary.keys()))
-print("Jaka jest stolica", key.upper())
+print("What is the capital of: ", key.upper())
 values = dictionary.get(key)
 values = values.upper()
 
@@ -133,20 +133,20 @@ used = []
 
 while wrong < MAX_WRONG and so_far != values:
     print(HANGMEN[wrong])
-    print("\nWykorzystałeś już następujące litery:\n", used)
-    print("\nNa razie zagadkowe słowo wygląda tak:\n", so_far)
-    guess = input("Wprowadz litere: ")
+    print("\nYou've already used the letter: \n", used)
+    print("\nFor now, the mysterious word looks like this: \n", so_far)
+    guess = input("Enter the letter: ")
     #guess = guess.lower()
     guess = guess.upper()
     while guess in used:
-        print("Już wykorzystałeś literę", guess)
-        guess = input("Wprowadź literę: ")
+        print("You have already used this letter", guess)
+        guess = input("Enter the letter: ")
         #guess = guess.lower()
         guess = guess.upper()
     used.append(guess)
 
     if guess in values:
-        print("Tak, ta litera występuje w słowie")
+        print("Yes, this letter appears in the word")
         new = ""
         for i in range(len(values)):
             if guess == values[i]:
@@ -155,15 +155,15 @@ while wrong < MAX_WRONG and so_far != values:
                 new += so_far[i]
         so_far = new
     else:
-        print("\nNiestety,", guess, "nie występuje w zagadkowym słowie.")
+        print("\nUnfortunately,", guess, "this letter doesn't appear in this word.")
         wrong += 1
 
 if wrong == MAX_WRONG:
     print(HANGMEN[wrong])
-    print("\nZostałeś powieszony!")
-    print("\nZagadkowe słowo to", values)
+    print("\nYou have been hanged!")
+    print("\nThe mysterious word is", values)
 else:
-    print('\nODGADŁEŚ!')
+    print('\nCONGRATULATION!!!')
     print('''
        0  
      /-+-/
@@ -183,5 +183,5 @@ else:
 --------------
 '''  
 )
-    print("\nZagadkowe słowo to", values)
-    input("\n\nAby zakończyć program, naciśnij klawisz Enter.")
+    print("\nThe mysterious word is", values)
+    input("\n\nTo end the program, press Enter.")
