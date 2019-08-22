@@ -114,12 +114,19 @@ print("Jaka jest stolica", key.upper())
 values = dictionary.get(key)
 values = values.upper()
 
-print(values)
+#print(values)
 #def randomChoice():
 
 
 MAX_WRONG = len(HANGMEN) -1
-so_far = "-" * len(values)
+so_far = ""
+for i in values:
+    if i == " ":
+        so_far = so_far + " "
+    else:
+        so_far = so_far + "-"
+
+
 wrong = 0
 
 used = []
